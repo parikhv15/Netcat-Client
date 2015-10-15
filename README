@@ -1,0 +1,66 @@
+Project 1: netcat_part
+-----------------------
+
+Name:Vraj Parikh
+uname:parikhv
+
+Name:Marshal Patel
+uname:marspate
+
+------------------------
+
+Description:
+
+The code contains two primary functions in netcat_part.cpp file namely, netcatServer() and netcatClient().
+
+Based on the values of the commandline arguments, one of the functions is invoked.
+
+The netcatClient() function sends data in batch of 1024 bytes which consists of a part of the actual message 
+and a digest of constant size.
+
+The netcatServer() function receives data in batch of 1024 bytes consisting of the message/data and digest.
+Additionally this function splits the message and the client digest, generates its own digest and compares it
+with the client digest. If the digests match, the received data is written to a file.
+
+------------------------------
+
+Tasks accomplished:
+
+ *   A message string provided as a commandline argument and enclosed within "" along with its HMAC digest is sent 
+     to the server.
+
+ *  A file whose name is given as a command line argument is sent to the server. Also, the user has an option to send
+    a file partially by giving the number of bytes(n) to send and/or offset(o) from where the bytes should be sent.
+    A digest is calculated and sent with the file content using HMAC function.
+
+ *  The user has an option to activate verbose mode.
+
+ *  If no port number is mentioned default port is used i.e. 6767.
+
+ * The server receives the message along with the digest sent and then calculates its own digest to assure whether the
+   message is the one that was sent by the client. If the the digests match, the output is written to a file else, the program is
+   is terminated.
+
+--------------------------------
+
+Steps to compile and run:
+
+1. Navigate to the directory where the makefile and the source code file is present. Make sure they are present at the same
+   location.
+
+2. Type make and hit enter. Step 1 and 2 to be followed on both client and server machines.
+
+3. If no error is displayed, that means the code has compiled successfully.
+
+4. Type the following command to start a server instance:
+   ./netcat_part -l [-v] [-p portno] hostaddress output.txt
+
+5. Type the following command to start a client instance:
+   ./netcat_part [-v] [-p portno] -m "message" hostaddress, incase of message mode.
+   or
+   ./netcat_part [-v] [-p portno] [-n noofbytes] [-o offset] hostaddress filename
+
+6  If the data is sent successfully, the data is written to output.txt file, success message is displayed and the program is 
+   exited. In case of error appropriate error message will be displayed.
+   
+
